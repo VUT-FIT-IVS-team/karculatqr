@@ -1,0 +1,9 @@
+# doxygen output
+html/
+latex/
+
+# macOS
+.DS_Store
+
+# CLion
+.idea/
