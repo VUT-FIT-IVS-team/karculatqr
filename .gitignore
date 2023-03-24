@@ -7,3 +7,6 @@ latex/
 
 # CLion
 .idea/
+
+# Standard
+build/
