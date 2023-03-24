@@ -1,3 +1,6 @@
-build and run: main.cpp
-	(cd ./cmake-build-debug/; ninja)
-	./cmake-build-debug/untitled
+run: main.c
+	./build/karculatqr
+	
+main.c: 
+	(cd ./build/; make)
+

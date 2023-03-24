@@ -7,9 +7,8 @@
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
     MainWindow mainWindow;
+    mainWindow.setMinimumSize(300,200);
+    mainWindow.resize(500, 400);
     mainWindow.show();
-    QPushButton button("Hello world!", nullptr);
-    button.resize(100, 100);
-    button.show();
     return QApplication::exec();
 }
