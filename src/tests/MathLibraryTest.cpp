@@ -16,10 +16,17 @@ protected:
 
 // test case
 TEST_F(MathLibraryTest, testClearCurrentValue) {
-    // set current value
     m->setCurrentValue(5);
-    // clear current value
     m->clearCurrentValue();
-    // check if current value is 0
+    // 0 is the default state
     EXPECT_EQ(0, m->getCurrentValue());
+}
+
+// test case
+TEST_F(MathLibraryTest, testClearState) {
+    m->setCurrentValue(5);
+    m->add();
+    m->clearState();
+    EXPECT_EQ(0, m->getCurrentValue());
+    EXPECT_EQ(0, m->getPreviousResult());
 }
