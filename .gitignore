@@ -7,3 +7,6 @@ latex/
 
 # CLion
 .idea/
+
+# CMake build files
+build/
