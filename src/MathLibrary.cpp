@@ -51,12 +51,30 @@ void MathLibrary::calculateRoot() {
 	// TODO: Implement calculateRoot
 }
 
-// TODO: Implement extra calculator feature HERE
+void MathLibrary::calculateSin() {
+	// TODO: Implement calculateSin
+}
+
+void MathLibrary::calculateCos() {
+	// TODO: Implement calculateCos
+}
+
+void MathLibrary::calculateTan() {
+	// TODO: Implement calculateTan
+}
+
+void MathLibrary::switchToDegrees() {
+	// TODO: Implement switchToDegrees
+}
+
+void MathLibrary::switchToRadians() {
+	// TODO: Implement switchToRadians
+}
 
 double MathLibrary::getCurrentValue() const {
-	return currentValue;
+	return -1;
 }
 
 double MathLibrary::getPreviousResult() const {
-	return previousResult;
+	return -1;
 }
