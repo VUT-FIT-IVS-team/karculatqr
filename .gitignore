@@ -10,3 +10,6 @@ latex/
 
 # Standard
 build/
+
+# Cache
+./src/.cache/

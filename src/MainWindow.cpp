@@ -161,6 +161,7 @@ void MainWindow::init_numbers(QGridLayout *numbers_Lt){
   p.setHorizontalPolicy(QSizePolicy::Expanding);
   p.setVerticalPolicy(QSizePolicy::Expanding);
   auto dot_Bt = new QPushButton(".");
+  connect(dot_Bt, &QPushButton::clicked, this, &MainWindow::sendNumber);
   dot_Bt->setSizePolicy(p);
   numbers_Lt->addWidget(dot_Bt, 5, 3);
   
@@ -179,6 +180,7 @@ void MainWindow::init_numbers(QGridLayout *numbers_Lt){
     connect(num_Bt, &QPushButton::clicked, this, &MainWindow::sendNumber);
   }
   auto num_Bt = new QPushButton("0");
+  connect(num_Bt, &QPushButton::clicked, this, &MainWindow::sendNumber);
   num_Bt->setSizePolicy(p);
   num_Bt->setFont(font);
   numbers_Lt->addWidget(num_Bt, 5, 1, 1,2);
