@@ -1,9 +1,11 @@
+#include <cstdio>
 #include <qboxlayout.h>
 #include <qcolor.h>
 #include <qfont.h>
 #include <qgridlayout.h>
 #include <QLineEdit>
 #include <qnamespace.h>
+#include <qobjectdefs.h>
 #include <qpalette.h>
 #include <qpushbutton.h>
 #include <qsize.h>
@@ -13,12 +15,13 @@
 #include "MainWindow.h"
 
 MainWindow::MainWindow(){
+  interface = new Interface;
   
   centralWidget = new QWidget;
   setCentralWidget(centralWidget);
   
-  setMinimumSize(350,400);
-  setMaximumSize(400,500);
+  setMinimumSize(350,250);
+  setMaximumSize(500,450);
   
   main_Lt = new QVBoxLayout;
   interactArea_Lt = new QHBoxLayout;
@@ -37,6 +40,12 @@ MainWindow::MainWindow(){
 
   centralWidget->setLayout(main_Lt);
   display_LE = new QLineEdit;
+  display_LE->setAlignment(Qt::AlignRight);
+  QFont font = display_LE->font();
+  font.setPointSize(18);
+  font.setBold(true);
+  
+  display_LE->setFont(font);
   
   
   main_Lt->addWidget(display_LE, 1);
@@ -45,9 +54,10 @@ MainWindow::MainWindow(){
   display_LE->setReadOnly(true);
   display_LE->setMinimumHeight(50);
   display_LE->setMaximumHeight(200);
+  display_LE->setText(interface->getCurrent_value());
+  display_LE->setPlaceholderText("0");
   
   main_Lt->addLayout(middleInteractArea_Lt);
-  main_Lt->setAlignment(display_LE,Qt::AlignTop);
   
   main_Lt->addLayout(interactArea_Lt,6);
   
@@ -84,21 +94,34 @@ void MainWindow::init_operandsLayout(QGridLayout *operands_Lt)
   auto *minus_Bt = new QPushButton("-");
   auto *plus_Bt = new QPushButton("+");
   auto *divide_Bt = new QPushButton("÷");
-  auto *times_Bt = new QPushButton("⨉");
-  auto *minPlus_Bt = new QPushButton("-/+");
+  auto *times_Bt = new QPushButton("×");
+  auto *minPlus_Bt = new QPushButton("±");
   auto *equals_Bt = new QPushButton("=");
-  auto *power_Bt = new QPushButton("x²");
+  auto *power_Bt = new QPushButton("xʸ");
   auto *root_Bt = new QPushButton("√");
-  auto *sin_Bt = new QPushButton("sin(x)");
-  auto *cosin_Bt = new QPushButton("cosin(x)");
-  auto *tg_Bt = new QPushButton("tg(x)");
+  auto *sin_Bt = new QPushButton("sin x");
+  auto *cosin_Bt = new QPushButton("cos x");
+  auto *tg_Bt = new QPushButton("tg x");
 
   QFont font = minus_Bt->font();
-  font.setPointSize(12);
-  divide_Bt->setFont(font);
+  font.setPointSize(14);
+  
+  sin_Bt->setFont(font);
+  cosin_Bt->setFont(font);
+  tg_Bt->setFont(font);
+
+  font.setBold(true);
   minus_Bt->setFont(font);
   plus_Bt->setFont(font);
   divide_Bt->setFont(font);
+  times_Bt->setFont(font);
+  minPlus_Bt->setFont(font);
+  equals_Bt->setFont(font);
+  power_Bt->setFont(font);
+  root_Bt->setFont(font);
+
+
+
 
   operands_Lt->addWidget(minus_Bt, 1,1);
   operands_Lt->addWidget(plus_Bt, 2,1);
@@ -137,18 +160,33 @@ void MainWindow::init_numbers(QGridLayout *numbers_Lt){
   QSizePolicy p;
   p.setHorizontalPolicy(QSizePolicy::Expanding);
   p.setVerticalPolicy(QSizePolicy::Expanding);
+  auto dot_Bt = new QPushButton(".");
+  dot_Bt->setSizePolicy(p);
+  numbers_Lt->addWidget(dot_Bt, 5, 3);
+  
+  QFont font = dot_Bt->font();
+  font.setPointSize(14);
+
+  dot_Bt->setFont(font);
   
   for (int i = 1; i <= 9; i++) {
     auto num_Bt = new QPushButton(QStringLiteral("%1").arg(i));
     num_Bt->setSizePolicy(p);
+    num_Bt->setFont(font);
     int row = ((9 - i) / 3) + 2;
     int column = ((i - 1) % 3) + 1;
     numbers_Lt->addWidget(num_Bt, row, column );
+    connect(num_Bt, &QPushButton::clicked, this, &MainWindow::sendNumber);
   }
   auto num_Bt = new QPushButton("0");
   num_Bt->setSizePolicy(p);
+  num_Bt->setFont(font);
   numbers_Lt->addWidget(num_Bt, 5, 1, 1,2);
-  auto dot_Bt = new QPushButton(".");
-  dot_Bt->setSizePolicy(p);
-  numbers_Lt->addWidget(dot_Bt, 5, 3);
+}
+
+
+void MainWindow::sendNumber(){
+  QPushButton *clickedButton = qobject_cast<QPushButton *>(sender());
+  int digitValue = clickedButton->text().toInt();
+  display_LE->setText(interface->addNumber(digitValue));
 }

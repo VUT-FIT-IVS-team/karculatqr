@@ -9,6 +9,7 @@
 #include <qboxlayout.h>
 #include <qevent.h>
 #include <qwidget.h>
+#include "Interface.h"
 
 //main window which will be shown after starting the program
 class MainWindow : public QMainWindow
@@ -23,6 +24,7 @@ protected:
 
     // slots are "functions" called by signals.
 private slots:
+    void sendNumber();
 
 private:
 
@@ -47,4 +49,5 @@ private:
     QLineEdit *display_LE;
     QPushButton *button;
     
+    Interface *interface;
 };

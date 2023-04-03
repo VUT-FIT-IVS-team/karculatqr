@@ -15,7 +15,7 @@ find_package(Qt5 COMPONENTS
         Widgets
         REQUIRED)
 
-add_executable(karculatqr main.cpp MainWindow.cpp)
+add_executable(karculatqr main.cpp MainWindow.cpp Interface.cpp)
 target_link_libraries(karculatqr
         Qt5::Core
         Qt5::Gui
