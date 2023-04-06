@@ -24,7 +24,8 @@ protected:
 
     // slots are "functions" called by signals.
 private slots:
-    void sendNumber();
+    void sendDigit();
+    void sendDot();
 
 private:
 

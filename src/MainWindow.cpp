@@ -161,7 +161,7 @@ void MainWindow::init_numbers(QGridLayout *numbers_Lt){
   p.setHorizontalPolicy(QSizePolicy::Expanding);
   p.setVerticalPolicy(QSizePolicy::Expanding);
   auto dot_Bt = new QPushButton(".");
-  connect(dot_Bt, &QPushButton::clicked, this, &MainWindow::sendNumber);
+  connect(dot_Bt, &QPushButton::clicked, this, &MainWindow::sendDot);
   dot_Bt->setSizePolicy(p);
   numbers_Lt->addWidget(dot_Bt, 5, 3);
   
@@ -177,18 +177,21 @@ void MainWindow::init_numbers(QGridLayout *numbers_Lt){
     int row = ((9 - i) / 3) + 2;
     int column = ((i - 1) % 3) + 1;
     numbers_Lt->addWidget(num_Bt, row, column );
-    connect(num_Bt, &QPushButton::clicked, this, &MainWindow::sendNumber);
+    connect(num_Bt, &QPushButton::clicked, this, &MainWindow::sendDigit);
   }
   auto num_Bt = new QPushButton("0");
-  connect(num_Bt, &QPushButton::clicked, this, &MainWindow::sendNumber);
+  connect(num_Bt, &QPushButton::clicked, this, &MainWindow::sendDigit);
   num_Bt->setSizePolicy(p);
   num_Bt->setFont(font);
   numbers_Lt->addWidget(num_Bt, 5, 1, 1,2);
 }
 
 
-void MainWindow::sendNumber(){
+void MainWindow::sendDigit(){
   QPushButton *clickedButton = qobject_cast<QPushButton *>(sender());
-  int digitValue = clickedButton->text().toInt();
-  display_LE->setText(interface->addNumber(digitValue));
+  display_LE->setText(interface->addDigit(clickedButton->text()));
+}
+
+void MainWindow::sendDot(){
+  display_LE->setText(interface->addDot());
 }
