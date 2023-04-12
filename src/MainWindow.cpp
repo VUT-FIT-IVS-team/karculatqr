@@ -153,6 +153,7 @@ void MainWindow::init_operandsLayout(QGridLayout *operands_Lt)
   sin_Bt->setSizePolicy(p);
   tg_Bt->setSizePolicy(p);
 
+  connect(plus_Bt, &QPushButton::clicked, this, &MainWindow::sendAdd);
 }
 
 void MainWindow::init_numbers(QGridLayout *numbers_Lt){
@@ -194,4 +195,7 @@ void MainWindow::sendDigit(){
 
 void MainWindow::sendDot(){
   display_LE->setText(interface->addDot());
+}
+void MainWindow::sendAdd(){
+  display_LE->setText(interface->add());
 }

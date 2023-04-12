@@ -13,11 +13,13 @@ class Interface {
   QString add();
   
   private:
-  long double number;
+  double pre_number;
+  double cur_number;
   
   QString current_value;
   
   bool isFloat = false;
   bool isPendingOperand = false;
+  bool isLastOperand = false;
   
 };

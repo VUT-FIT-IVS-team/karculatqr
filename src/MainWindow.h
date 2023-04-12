@@ -26,6 +26,7 @@ protected:
 private slots:
     void sendDigit();
     void sendDot();
+    void sendAdd();
 
 private:
 
