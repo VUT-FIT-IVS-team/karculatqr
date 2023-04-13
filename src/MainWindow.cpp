@@ -8,11 +8,13 @@
 #include <qobjectdefs.h>
 #include <qpalette.h>
 #include <qpushbutton.h>
+#include <qshortcut.h>
 #include <qsize.h>
 #include <qsizepolicy.h>
 #include <qstringliteral.h>
 #include <qwidget.h>
 #include "MainWindow.h"
+#include <QShortcut>
 
 MainWindow::MainWindow(){
     interface = new Interface;
@@ -164,6 +166,29 @@ void MainWindow::init_operandsLayout(QGridLayout *operands_Lt)
     connect(sin_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
     connect(tg_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
     connect(equals_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
+
+	auto *plus_sc = new QShortcut(QKeySequence("+"), this);
+    connect(plus_sc, &QShortcut::activated, plus_Bt, &QPushButton::click);
+	auto *minus_sc = new QShortcut(QKeySequence("-"), this);
+    connect(minus_sc, &QShortcut::activated, minus_Bt, &QPushButton::click);
+	auto *divide_sc = new QShortcut(QKeySequence("/"), this);
+    connect(divide_sc, &QShortcut::activated, divide_Bt, &QPushButton::click);
+	auto *times_sc = new QShortcut(QKeySequence("*"), this);
+    connect(times_sc, &QShortcut::activated, times_Bt, &QPushButton::click);
+	auto *minPlus_sc = new QShortcut(QKeySequence("i"), this);
+    connect(minPlus_sc, &QShortcut::activated, minPlus_Bt, &QPushButton::click);
+	auto *power_sc = new QShortcut(QKeySequence("o"), this);
+    connect(power_sc, &QShortcut::activated, power_Bt, &QPushButton::click);
+	auto *root_sc = new QShortcut(QKeySequence("r"), this);
+    connect(root_sc, &QShortcut::activated, root_Bt, &QPushButton::click);
+	auto *cosin_sc = new QShortcut(QKeySequence("c"), this);
+    connect(cosin_sc, &QShortcut::activated, cosin_Bt, &QPushButton::click);
+	auto *sin_sc = new QShortcut(QKeySequence("s"), this);
+    connect(sin_sc, &QShortcut::activated, sin_Bt, &QPushButton::click);
+	auto *tg_sc = new QShortcut(QKeySequence("t"), this);
+    connect(tg_sc, &QShortcut::activated, tg_Bt, &QPushButton::click);
+	auto *equals_sc = new QShortcut(QKeySequence("Enter"), this);
+    connect(equals_sc, &QShortcut::activated, equals_Bt, &QPushButton::click);
 }
 
 void MainWindow::init_numbers(QGridLayout *numbers_Lt){
@@ -172,6 +197,8 @@ void MainWindow::init_numbers(QGridLayout *numbers_Lt){
     p.setVerticalPolicy(QSizePolicy::Expanding);
     auto dot_Bt = new QPushButton(".");
     connect(dot_Bt, &QPushButton::clicked, this, &MainWindow::sendDot);
+	auto *dot_sc = new QShortcut(QKeySequence("."),this);
+    connect(dot_sc, &QShortcut::activated, dot_Bt, &QPushButton::click);
     dot_Bt->setSizePolicy(p);
     numbers_Lt->addWidget(dot_Bt, 5, 3);
     
@@ -188,12 +215,16 @@ void MainWindow::init_numbers(QGridLayout *numbers_Lt){
         int column = ((i - 1) % 3) + 1;
         numbers_Lt->addWidget(num_Bt, row, column );
         connect(num_Bt, &QPushButton::clicked, this, &MainWindow::sendDigit);
+	    auto *digit_sc = new QShortcut(QKeySequence(QStringLiteral("%1").arg(i)), this);
+        connect(digit_sc, &QShortcut::activated, num_Bt, &QPushButton::click);
     }
-    auto num_Bt = new QPushButton("0");
-    connect(num_Bt, &QPushButton::clicked, this, &MainWindow::sendDigit);
-    num_Bt->setSizePolicy(p);
-    num_Bt->setFont(font);
-    numbers_Lt->addWidget(num_Bt, 5, 1, 1,2);
+    auto zero_bt = new QPushButton("0");
+    connect(zero_bt, &QPushButton::clicked, this, &MainWindow::sendDigit);
+	auto *zero_sc = new QShortcut(QKeySequence("0"),this);
+    connect(zero_sc, &QShortcut::activated, zero_bt, &QPushButton::click);
+    zero_bt->setSizePolicy(p);
+    zero_bt->setFont(font);
+    numbers_Lt->addWidget(zero_bt, 5, 1, 1,2);
 }
 
 

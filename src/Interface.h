@@ -30,5 +30,4 @@ private:
     
     bool isFloat = false;
     bool isLastOperand = false;
-  
 };
