@@ -29,19 +29,47 @@ QString Interface::addDot() {
   return current_value;
 }
 
-QString Interface::add(){
-  if (isPendingOperand) {
-      cur_number = current_value.toDouble();
-      qDebug() << "Adding:" << pre_number << "+" << cur_number;
-      cur_number = cur_number + pre_number;
-      current_value = QString::number(cur_number);
-      qDebug() << "After add" << cur_number;
-      qDebug() << "After Adding" << current_value;
-  }
-  else {
-    pre_number = current_value.toDouble();
-  }
-  isPendingOperand = true;
-  isLastOperand = true;
-  return current_value;
+QString Interface::handleOperation(enum operand recOperation){
+    current_value = QString::number(performOperation(pendingOperand));
+	
+  	if (!isLastOperand) {
+        pre_number = current_value.toDouble();
+  	}
+	
+    isLastOperand = true;
+    pendingOperand = recOperation;
+    return current_value;
+};
+
+
+double Interface::add_s(){
+    return cur_number + pre_number;
+}
+double Interface::substract_s(){
+    return cur_number - pre_number;
+}
+
+double Interface::multiply_s(){
+    return cur_number * pre_number;
+}
+
+double Interface::divide_s(){
+    return pre_number / cur_number;
+}
+
+double Interface::performOperation(enum operand Operation){
+    cur_number = current_value.toDouble();
+	switch (pendingOperand) {
+	default:
+	case none:
+	        return current_value.toDouble();
+	case plus:
+			return add_s();
+	case minus:
+			return substract_s();
+	case multiply:
+			return multiply_s();
+	case divide:
+			return divide_s();
+	}
 }

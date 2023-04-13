@@ -91,8 +91,8 @@ void MainWindow::init_middleInteractArea(QHBoxLayout *middleInteractArea_Lt)
 
 void MainWindow::init_operandsLayout(QGridLayout *operands_Lt)
 {
-  auto *minus_Bt = new QPushButton("-");
   auto *plus_Bt = new QPushButton("+");
+  auto *minus_Bt = new QPushButton("-");
   auto *divide_Bt = new QPushButton("÷");
   auto *times_Bt = new QPushButton("×");
   auto *minPlus_Bt = new QPushButton("±");
@@ -111,8 +111,8 @@ void MainWindow::init_operandsLayout(QGridLayout *operands_Lt)
   tg_Bt->setFont(font);
 
   font.setBold(true);
-  minus_Bt->setFont(font);
   plus_Bt->setFont(font);
+  minus_Bt->setFont(font);
   divide_Bt->setFont(font);
   times_Bt->setFont(font);
   minPlus_Bt->setFont(font);
@@ -123,13 +123,13 @@ void MainWindow::init_operandsLayout(QGridLayout *operands_Lt)
 
 
 
-  operands_Lt->addWidget(minus_Bt, 1,1);
+
   operands_Lt->addWidget(plus_Bt, 2,1);
+  operands_Lt->addWidget(minus_Bt, 1,1);
   operands_Lt->addWidget(divide_Bt, 3,1);
   operands_Lt->addWidget(times_Bt, 4,1);
   operands_Lt->addWidget(minPlus_Bt, 1,2);
   operands_Lt->addWidget(power_Bt, 2,2);
-  operands_Lt->addWidget(root_Bt, 3,2);
   operands_Lt->addWidget(root_Bt, 3,2);
   operands_Lt->addWidget(sin_Bt, 1,3);
   operands_Lt->addWidget(cosin_Bt, 2,3);
@@ -142,8 +142,8 @@ void MainWindow::init_operandsLayout(QGridLayout *operands_Lt)
   p.setHorizontalPolicy(QSizePolicy::Expanding);
   equals_Bt->setSizePolicy(p);
 
-  minus_Bt->setSizePolicy(p);
   plus_Bt->setSizePolicy(p);
+  minus_Bt->setSizePolicy(p);
   divide_Bt->setSizePolicy(p);
   times_Bt->setSizePolicy(p);
   minPlus_Bt->setSizePolicy(p);
@@ -153,7 +153,17 @@ void MainWindow::init_operandsLayout(QGridLayout *operands_Lt)
   sin_Bt->setSizePolicy(p);
   tg_Bt->setSizePolicy(p);
 
-  connect(plus_Bt, &QPushButton::clicked, this, &MainWindow::sendAdd);
+  connect(plus_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
+  connect(minus_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
+  connect(divide_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
+  connect(times_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
+  connect(minPlus_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
+  connect(power_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
+  connect(root_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
+  connect(cosin_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
+  connect(sin_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
+  connect(tg_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
+  connect(equals_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
 }
 
 void MainWindow::init_numbers(QGridLayout *numbers_Lt){
@@ -196,6 +206,40 @@ void MainWindow::sendDigit(){
 void MainWindow::sendDot(){
   display_LE->setText(interface->addDot());
 }
-void MainWindow::sendAdd(){
-  display_LE->setText(interface->add());
+void MainWindow::sendOperation(){
+    QPushButton *clickedButton = qobject_cast<QPushButton *>(sender());
+    auto charOpearation = clickedButton->text();
+    if (charOpearation == "+") {
+        display_LE->setText(interface->handleOperation(plus));
+    }
+    else if (charOpearation == "-") {
+        display_LE->setText(interface->handleOperation(minus));
+    }
+    else if (charOpearation == "÷") {
+        display_LE->setText(interface->handleOperation(divide));
+    }
+    else if (charOpearation == "×") {
+        display_LE->setText(interface->handleOperation(multiply));
+    }
+    else if (charOpearation == "±") {
+        display_LE->setText(interface->handleOperation(invert));
+    }
+    else if (charOpearation == "xʸ") {
+        display_LE->setText(interface->handleOperation(power));
+    }
+    else if (charOpearation == "√") {
+        display_LE->setText(interface->handleOperation(sqrt));
+    }
+    else if (charOpearation == "sin x") {
+        display_LE->setText(interface->handleOperation(sin));
+    }
+    else if (charOpearation == "cos x") {
+        display_LE->setText(interface->handleOperation(cos));
+    }
+    else if (charOpearation == "tg x") {
+        display_LE->setText(interface->handleOperation(tg));
+    }
+    else if (charOpearation == "=") {
+        display_LE->setText(interface->handleOperation(none));
+    }
 }
