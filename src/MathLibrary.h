@@ -17,7 +17,9 @@ public:
 	void clearState();
 
 	/**
-	 * sets currentValue to value
+	 * sets currentValue to value.
+	 * When currentValue is set, previousResult is set to its value
+	 * and currentValue is set to value.
 	 * @param value the number to set currentValue to
 	 */
 	void setCurrentValue(double value);
@@ -64,7 +66,30 @@ public:
 	 */
 	void calculateRoot();
 
-	// TODO extra calculator feature HERE
+	/**
+	 * calculates the sine of currentValue.
+	*/
+	void calculateSin();
+
+	/**
+	 * calculates the cosine of currentValue.
+	*/
+	void calculateCos();
+
+	/**
+	 * calculates the tangent of currentValue.
+	*/
+	void calculateTan();
+
+	/**
+	 * switches the unit of currentValue to radians.
+	*/
+	void switchToRadians();
+
+	/**
+	 * switches the unit of currentValue to degrees.
+	*/
+	void switchToDegrees();
 
 	/// return the currentValue
 	double getCurrentValue() const;
