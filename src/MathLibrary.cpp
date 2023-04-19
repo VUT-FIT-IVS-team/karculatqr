@@ -13,22 +13,49 @@ MathLibrary::MathLibrary() {
 
 void MathLibrary::clearCurrentValue() {
 	// TODO: Implement clearCurrentValue
+	if (isCurrentValueSet) {
+		currentValue = 0;
+		isCurrentValueSet = false;
+	}
 }
 
 void MathLibrary::clearState() {
 	// TODO: Implement clearState
+	if (isCurrentValueSet) {
+		currentValue = 0;
+		isCurrentValueSet = false;
+	}
 }
 
 void MathLibrary::setCurrentValue(double value) {
 	// TODO: Implement setCurrentValue
+	if (!isCurrentValueSet) {
+		currentValue = value;
+		isCurrentValueSet = true;
+	}
 }
 
 void MathLibrary::add() {
 	// TODO: Implement add
+	double value;
+	if (isPreviousResultSet) {
+		value = previousResult + currentValue;
+	}
+	else {
+		value = currentValue;
+	}
+
 }
 
 void MathLibrary::subtract() {
 	// TODO: Implement subtract
+	double value;
+	if (isPreviousResultSet) {
+		value = previousResult - currentValue;
+	}
+	else {
+		value = currentValue;
+	}
 }
 
 void MathLibrary::multiply() {
@@ -41,6 +68,7 @@ void MathLibrary::divide() {
 
 void MathLibrary::calculateFactorial() {
 	// TODO: Implement calculateFactorial
+
 }
 
 void MathLibrary::calculatePower() {
