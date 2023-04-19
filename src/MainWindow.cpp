@@ -260,36 +260,36 @@ void MainWindow::sendOperation(){
     QPushButton *clickedButton = qobject_cast<QPushButton *>(sender());
     auto charOpearation = clickedButton->text();
     if (charOpearation == "+") {
-        display_LE->setText(interface->handleOperation(plus));
+        display_LE->setText(interface->handleOperation(plus_e));
     }
     else if (charOpearation == "-") {
-        display_LE->setText(interface->handleOperation(minus));
+        display_LE->setText(interface->handleOperation(minus_e));
     }
     else if (charOpearation == "÷") {
-        display_LE->setText(interface->handleOperation(divide));
+        display_LE->setText(interface->handleOperation(divide_e));
     }
     else if (charOpearation == "×") {
-        display_LE->setText(interface->handleOperation(multiply));
+        display_LE->setText(interface->handleOperation(multiply_e));
     }
     else if (charOpearation == "±") {
-        display_LE->setText(interface->handleOperation(invert));
+        display_LE->setText(interface->handleOperation(invert_e));
     }
     else if (charOpearation == "xʸ") {
-        display_LE->setText(interface->handleOperation(power));
+        display_LE->setText(interface->handleOperation(power_e));
     }
     else if (charOpearation == "√") {
-        display_LE->setText(interface->handleOperation(sqrt));
+        display_LE->setText(interface->handleOperation(sqrt_e));
     }
     else if (charOpearation == "sin x") {
-        display_LE->setText(interface->handleOperation(sin));
+        display_LE->setText(interface->handleOperation(sin_e));
     }
     else if (charOpearation == "cos x") {
-        display_LE->setText(interface->handleOperation(cos));
+        display_LE->setText(interface->handleOperation(cos_e));
     }
     else if (charOpearation == "tg x") {
-        display_LE->setText(interface->handleOperation(tg));
+        display_LE->setText(interface->handleOperation(tg_e));
     }
     else if (charOpearation == "=") {
-        display_LE->setText(interface->handleOperation(none));
+        display_LE->setText(interface->handleOperation(none_e));
     }
 }

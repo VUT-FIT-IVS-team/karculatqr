@@ -1,9 +1,11 @@
 #include "Interface.h"
 #include <QDebug>
+#include <cmath>
 #include <qchar.h>
 #include <QDebug>
 #include <QString>
 
+#include <math.h>
 
 Interface::Interface() { current_value = QString(); };
 
@@ -11,6 +13,10 @@ Interface::~Interface(){};
 
 QString Interface::getCurrent_value() { return current_value; };
 
+/**
+* Adds digit to text currently displayed in GUI.
+* Doesnt affect the number variables
+*/
 QString Interface::addDigit(QString digit) {
     if (isLastOperand) {
         pre_number = current_value.toDouble();
@@ -21,6 +27,11 @@ QString Interface::addDigit(QString digit) {
     return current_value;
 }
 
+
+/**
+* Adds dot to current text displayed in GUI.
+* Doesnt affect the number variables
+*/
 QString Interface::addDot() {
     if (!isFloat) {
         current_value.append(QStringLiteral("%1").arg('.'));
@@ -29,6 +40,15 @@ QString Interface::addDot() {
     return current_value;
 }
 
+/**
+* Calls performOperation function and does some helper things,
+* like check if last operation was adding number or operation.
+* Sets cur_number to current value present on display.
+* 
+* PLACEHOLDER FOR MATH LIBRARY
+* 
+* @param Operation to be performed
+*/
 QString Interface::handleOperation(enum operand recOperation){
     current_value = QString::number(performOperation(pendingOperand));
 	
@@ -41,7 +61,12 @@ QString Interface::handleOperation(enum operand recOperation){
     return current_value;
 };
 
-
+/**
+* Testing fucntions for GUI to call in absence of math library.
+* 
+* PLACEHOLDER FOR MATH LIBRARY
+* 
+*/
 double Interface::add_s(){
     return cur_number + pre_number;
 }
@@ -57,19 +82,39 @@ double Interface::divide_s(){
     return pre_number / cur_number;
 }
 
+/**
+* Calls matching function decided by pressed button.
+* Sets cur_number to current value present on display.
+* 
+* PLACEHOLDER FOR MATH LIBRARY
+* 
+* @param Operation to be performed
+*/
 double Interface::performOperation(enum operand Operation){
     cur_number = current_value.toDouble();
 	switch (pendingOperand) {
 	default:
-	case none:
+	case none_e:
 	        return current_value.toDouble();
-	case plus:
+	case plus_e:
 			return add_s();
-	case minus:
+	case minus_e:
 			return substract_s();
-	case multiply:
+	case multiply_e:
 			return multiply_s();
-	case divide:
+	case divide_e:
+			return divide_s();
+	case sin_e:
+			return divide_s();
+	case cos_e:
+			return divide_s();
+	case tg_e:
+			return divide_s();
+	case invert_e:
+			return divide_s();
+	case power_e:
+			return divide_s();
+	case sqrt_e:
 			return divide_s();
 	}
 }
