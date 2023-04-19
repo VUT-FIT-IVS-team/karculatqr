@@ -169,26 +169,47 @@ void MainWindow::init_operandsLayout(QGridLayout *operands_Lt)
 
 	auto *plus_sc = new QShortcut(QKeySequence("+"), this);
     connect(plus_sc, &QShortcut::activated, plus_Bt, &QPushButton::click);
+    plus_Bt->setToolTip("Key: +");
+    
 	auto *minus_sc = new QShortcut(QKeySequence("-"), this);
     connect(minus_sc, &QShortcut::activated, minus_Bt, &QPushButton::click);
+    minus_Bt->setToolTip("Key: -");
+    
 	auto *divide_sc = new QShortcut(QKeySequence("/"), this);
     connect(divide_sc, &QShortcut::activated, divide_Bt, &QPushButton::click);
+    divide_Bt->setToolTip("Key: /");
+    
 	auto *times_sc = new QShortcut(QKeySequence("*"), this);
     connect(times_sc, &QShortcut::activated, times_Bt, &QPushButton::click);
+    times_Bt->setToolTip("Key: *");
+    
 	auto *minPlus_sc = new QShortcut(QKeySequence("i"), this);
     connect(minPlus_sc, &QShortcut::activated, minPlus_Bt, &QPushButton::click);
+    minPlus_Bt->setToolTip("Key: i");
+    
 	auto *power_sc = new QShortcut(QKeySequence("o"), this);
     connect(power_sc, &QShortcut::activated, power_Bt, &QPushButton::click);
+    power_Bt->setToolTip("Key: o");
+    
 	auto *root_sc = new QShortcut(QKeySequence("r"), this);
     connect(root_sc, &QShortcut::activated, root_Bt, &QPushButton::click);
+    root_Bt->setToolTip("Key: r");
+    
 	auto *cosin_sc = new QShortcut(QKeySequence("c"), this);
     connect(cosin_sc, &QShortcut::activated, cosin_Bt, &QPushButton::click);
+    cosin_Bt->setToolTip("Key: c");
+    
 	auto *sin_sc = new QShortcut(QKeySequence("s"), this);
     connect(sin_sc, &QShortcut::activated, sin_Bt, &QPushButton::click);
+    sin_Bt->setToolTip("Key: s");
+    
 	auto *tg_sc = new QShortcut(QKeySequence("t"), this);
     connect(tg_sc, &QShortcut::activated, tg_Bt, &QPushButton::click);
+    tg_Bt->setToolTip("Key: t");
+    
 	auto *equals_sc = new QShortcut(QKeySequence("Enter"), this);
     connect(equals_sc, &QShortcut::activated, equals_Bt, &QPushButton::click);
+    equals_Bt->setToolTip("Key: Enter");
 }
 
 void MainWindow::init_numbers(QGridLayout *numbers_Lt){
@@ -225,9 +246,8 @@ void MainWindow::init_numbers(QGridLayout *numbers_Lt){
     zero_bt->setSizePolicy(p);
     zero_bt->setFont(font);
     numbers_Lt->addWidget(zero_bt, 5, 1, 1,2);
+	
 }
-
-
 void MainWindow::sendDigit(){
     QPushButton *clickedButton = qobject_cast<QPushButton *>(sender());
     display_LE->setText(interface->addDigit(clickedButton->text()));
