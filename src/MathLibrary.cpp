@@ -1,5 +1,6 @@
 //
 // Created by Jan Brudny on 19.03.2023.
+// Edited by Jaromir Otevrel
 //
 
 #include "MathLibrary.h"
@@ -17,6 +18,10 @@ void MathLibrary::clearCurrentValue() {
 		currentValue = 0;
 		isCurrentValueSet = false;
 	}
+	if (isPreviousResultSet) {
+		previousResult = 0;
+		isPreviousResultSet = false;
+	}
 }
 
 void MathLibrary::clearState() {
@@ -25,6 +30,11 @@ void MathLibrary::clearState() {
 		currentValue = 0;
 		isCurrentValueSet = false;
 	}
+	if (isPreviousResultSet) {
+		previousResult = 0;
+		isPreviousResultSet = false;
+	}
+	
 }
 
 void MathLibrary::setCurrentValue(double value) {
@@ -121,6 +131,7 @@ void MathLibrary::calculatePower() {
 
 void MathLibrary::calculateRoot() {
 	// TODO: Implement calculateRoot
+
 }
 
 void MathLibrary::calculateSin() {
@@ -133,6 +144,8 @@ void MathLibrary::calculateCos() {
 
 void MathLibrary::calculateTan() {
 	// TODO: Implement calculateTan
+	double value;
+	//value = calculateSin(currentValue) / calculateCos(currentValue);
 }
 
 void MathLibrary::switchToDegrees() {
@@ -144,9 +157,9 @@ void MathLibrary::switchToRadians() {
 }
 
 double MathLibrary::getCurrentValue() const {
-	return -1;
+	return currentValue;
 }
 
 double MathLibrary::getPreviousResult() const {
-	return -1;
+	return previousResult;
 }
