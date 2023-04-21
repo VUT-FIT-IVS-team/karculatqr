@@ -4,6 +4,43 @@
 //
 
 #include "MathLibrary.h"
+#include <cmath>
+
+void MathLibrary::getOneNumber() {
+	if (isCurrentValueSet) {
+		numberone = currentValue;
+		return;
+	}
+	else if (isPreviousResultSet) {
+		numberone = previousResult;
+		return;
+	}
+	else {
+		throw MathLibraryException("No number to calculate", MathLibraryExceptionType::NoNumberToCalculate);
+	}
+		
+}
+
+void MathLibrary::getTwoNumbers() {
+	if (isCurrentValueSet && isPreviousResultSet) {
+		numberone = previousResult;
+		numbertwo = currentValue;
+		return;
+	}
+	else if (isCurrentValueSet && !isPreviousResultSet) {
+		numberone = currentValue;
+		numbertwo = currentValue;
+		return;
+	}
+	else if (!isCurrentValueSet && isPreviousResultSet) {
+		numberone = previousResult;
+		numbertwo = previousResult;
+		return;
+	}
+	else if (!isCurrentValueSet && !isPreviousResultSet) {
+		throw MathLibraryException("No numbers to calculate", MathLibraryExceptionType::NoNumbersToCalculate);
+	}	
+}
 
 MathLibrary::MathLibrary() {
 	currentValue = 0;
@@ -13,19 +50,13 @@ MathLibrary::MathLibrary() {
 }
 
 void MathLibrary::clearCurrentValue() {
-	// TODO: Implement clearCurrentValue
 	if (isCurrentValueSet) {
 		currentValue = 0;
 		isCurrentValueSet = false;
 	}
-	if (isPreviousResultSet) {
-		previousResult = 0;
-		isPreviousResultSet = false;
-	}
 }
 
 void MathLibrary::clearState() {
-	// TODO: Implement clearState
 	if (isCurrentValueSet) {
 		currentValue = 0;
 		isCurrentValueSet = false;
@@ -38,104 +69,94 @@ void MathLibrary::clearState() {
 }
 
 void MathLibrary::setCurrentValue(double value) {
-	// TODO: Implement setCurrentValue
 	if (!isCurrentValueSet) {
 		currentValue = value;
 		isCurrentValueSet = true;
 	}
+	else
+	{
+		previousResult = currentValue;
+		isPreviousResultSet = true;
+		currentValue = value;
+	}
 }
 
 void MathLibrary::add() {
-	// TODO: Implement add
-	double value;
-	if (isPreviousResultSet) {
-		value = previousResult + currentValue;
-	}
-	else {
-		value = currentValue;
-	}
-
+	getTwoNumbers();
+	previousResult = numberone + numbertwo;
+	isPreviousResultSet = true;
+	isCurrentValueSet = false;
 }
 
 void MathLibrary::subtract() {
-	// TODO: Implement subtract
-	double value;
-	if (isPreviousResultSet) {
-		value = previousResult - currentValue;
-	}
-	else {
-		value = currentValue;
-	}
+	getTwoNumbers();
+	previousResult = numberone - numbertwo;
+	isPreviousResultSet = true;
+	isCurrentValueSet = false;
 }
 
 void MathLibrary::multiply() {
-	// TODO: Implement multiply
-	double value;
-	if (isPreviousResultSet) {
-		value = previousResult * currentValue;
-	}
-	else {
-		value = currentValue;
-	}
+	getTwoNumbers();
+	previousResult = numberone * numbertwo;
+	isPreviousResultSet = true;
+	isCurrentValueSet = false;
+
 }
 
 void MathLibrary::divide() {
-	// TODO: Implement divide
-	double value;
-	if (isPreviousResultSet) {
-		if (currentValue == 0) {
-			throw "Division by zero";
-		}else{
-			value = previousResult / currentValue;
-		}	
+	getTwoNumbers();
+	if (numbertwo == 0) {
+		throw MathLibraryException("Division by zero", MathLibraryExceptionType::DivisionByZero);
 	}
-	else {
-		value = currentValue;
-	}
+	previousResult = numberone / numbertwo;
+	isPreviousResultSet = true;
+	isCurrentValueSet = false;
 }
 
 void MathLibrary::calculateFactorial() {
-	// TODO: Implement calculateFactorial
-	double value;
-	if (currentValue < 0) {
-		throw "Factorial of negative number";
-	}
-	else if (currentValue == 0) {
-		value = 1;
+	getOneNumber();
+	if (numberone < 0) {
+		throw MathLibraryException("Factorial of negative number", MathLibraryExceptionType::NegativeFactorial);
 	}
 	else {
-		value = currentValue;
-		for (int i = currentValue - 1; i > 0; i--) {
-			value *= i;
+		currentValue = 1;
+		for (int i = 1; i <= numberone; i++) {
+			currentValue *= i;
 		}
 	}
+
 
 }
 
 void MathLibrary::calculatePower() {
 	// TODO: Implement calculatePower
-	double value;
-	if (isPreviousResultSet) {
-		for (int i = 0; i < currentValue; i++)
-		{
-			value *= previousResult;
-		}
-	}
-	else {
-		for (int i = 0; i < currentValue; i++)
-		{
-			value *= currentValue;
-		}
-	}
+	getTwoNumbers();
+	previousResult =  pow(numberone, numbertwo);
+	isPreviousResultSet = true;
+	isCurrentValueSet = false;
+
 }
 
 void MathLibrary::calculateRoot() {
-	// TODO: Implement calculateRoot
+	getTwoNumbers();
+	if(numbertwo == 0){
+		throw MathLibraryException("Zero root", MathLibraryExceptionType::InvalidInput);
+	}
+	if(std::fmod(numbertwo, 2.00) == 0.00 && numberone < 0){
+		throw MathLibraryException("Negative root of even number", MathLibraryExceptionType::InvalidInput);
+	}
+	previousResult = pow(numberone, 1.000 / numbertwo);
+	isPreviousResultSet = true;
+	isCurrentValueSet = false;
+
 
 }
 
 void MathLibrary::calculateSin() {
 	// TODO: Implement calculateSin
+	getOneNumber();
+	currentValue = sin(numberone);
+	isCurrentValueSet = true;
 }
 
 void MathLibrary::calculateCos() {
@@ -144,22 +165,27 @@ void MathLibrary::calculateCos() {
 
 void MathLibrary::calculateTan() {
 	// TODO: Implement calculateTan
-	double value;
-	//value = calculateSin(currentValue) / calculateCos(currentValue);
 }
 
 void MathLibrary::switchToDegrees() {
-	// TODO: Implement switchToDegrees
+	isInRadians = false;
 }
 
 void MathLibrary::switchToRadians() {
-	// TODO: Implement switchToRadians
+	isInRadians = true;
 }
 
 double MathLibrary::getCurrentValue() const {
+	if (!isCurrentValueSet) {
+		throw MathLibraryException("No current value", MathLibraryExceptionType::NoCurrentValue);
+	}
 	return currentValue;
 }
 
 double MathLibrary::getPreviousResult() const {
+	if (!isPreviousResultSet) {
+		throw MathLibraryException("No previous result", MathLibraryExceptionType::NoPreviousResult);
+	}
 	return previousResult;
 }
+
