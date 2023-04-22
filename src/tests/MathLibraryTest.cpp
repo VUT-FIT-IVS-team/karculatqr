@@ -132,11 +132,11 @@ TEST_F(MathLibraryTest, testCalculateSin){
     m->switchToDegrees();
     m->setCurrentValue(90);
     m->calculateSin();
-    EXPECT_EQ(1, m->getPreviousResult());
+    EXPECT_EQ(1, m->getCurrentValue());
     m->switchToRadians();
     m->setCurrentValue(M_PI / 2);
     m->calculateSin();
-    EXPECT_EQ(1, m->getPreviousResult());
+    EXPECT_EQ(1, m->getCurrentValue());
 }
 
 TEST_F(MathLibraryTest, testCalculateCos){
@@ -144,14 +144,16 @@ TEST_F(MathLibraryTest, testCalculateCos){
     m->switchToDegrees();
     m->setCurrentValue(0);
     m->calculateCos();
-    EXPECT_EQ(1, m->getPreviousResult());
+    EXPECT_EQ(1, m->getCurrentValue());
+    m->clearCurrentValue();
     m->switchToRadians();
     m->setCurrentValue(M_PI);
     m->calculateCos();
-    EXPECT_EQ(-1, m->getPreviousResult());
+    EXPECT_EQ(-1, m->getCurrentValue());
+    m->clearCurrentValue();
     m->setCurrentValue(M_PI / 2);
     m->calculateCos();
-    EXPECT_EQ(0, m->getPreviousResult());
+    EXPECT_DOUBLE_EQ(0, m->getCurrentValue());
 }
 
 TEST_F(MathLibraryTest, testCalculateTan){
@@ -159,15 +161,15 @@ TEST_F(MathLibraryTest, testCalculateTan){
     m->switchToDegrees();
     m->setCurrentValue(45);
     m->calculateTan();
-    EXPECT_EQ(1, m->getPreviousResult());
+    EXPECT_DOUBLE_EQ(1, m->getCurrentValue());
     m->setCurrentValue(60);
     m->calculateTan();
-    EXPECT_EQ(sqrt(3), m->getPreviousResult());
+    EXPECT_DOUBLE_EQ(sqrt(3), m->getCurrentValue());
     m->switchToRadians();
     m->setCurrentValue(M_PI / 4);
     m->calculateTan();
-    EXPECT_EQ(1, m->getPreviousResult());
+    EXPECT_DOUBLE_EQ(1, m->getCurrentValue());
     m->setCurrentValue(M_PI / 3);
     m->calculateTan();
-    EXPECT_EQ(sqrt(3), m->getPreviousResult());
+    EXPECT_DOUBLE_EQ(sqrt(3), m->getCurrentValue());
 }

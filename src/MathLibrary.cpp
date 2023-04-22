@@ -155,16 +155,39 @@ void MathLibrary::calculateRoot() {
 void MathLibrary::calculateSin() {
 	// TODO: Implement calculateSin
 	getOneNumber();
-	currentValue = sin(numberone);
+	if (isInRadians) {
+		currentValue = sin(numberone);
+	}
+	else {
+		currentValue = sin(numberone * M_PI / 180);
+	}
 	isCurrentValueSet = true;
 }
 
 void MathLibrary::calculateCos() {
 	// TODO: Implement calculateCos
+	getOneNumber();
+	if (isInRadians) {
+		currentValue = cos(numberone);
+	}
+	else {
+		currentValue = roundf(cos(numberone * M_PI / 180));
+		
+	}
 }
 
 void MathLibrary::calculateTan() {
 	// TODO: Implement calculateTan
+	getOneNumber();
+	if (isInRadians) {
+		currentValue = tan(numberone);
+	}
+	else {
+		currentValue = tan(numberone * M_PI / 180);
+	}
+	/* if (fmod(currentValue, 90.00) == 0) {
+		throw MathLibraryException("Tan of 90 degrees", MathLibraryExceptionType::InvalidInput);
+	} */
 }
 
 void MathLibrary::switchToDegrees() {
