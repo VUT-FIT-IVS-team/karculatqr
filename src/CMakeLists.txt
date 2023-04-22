@@ -17,7 +17,7 @@ enable_testing()
 
 include(GoogleTest)
 
-add_library(MathLibrary MathLibrary.cpp MathLibrary.h)
+add_library(MathLibrary MathLibrary.cpp MathLibrary.h MathLibraryExceptions.h MathLibraryExceptions.cpp)
 
 add_executable(MathLibraryTest tests/MathLibraryTest.cpp)
 

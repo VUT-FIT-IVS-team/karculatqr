@@ -1,7 +1,7 @@
 //
 // Created by Jan Brudny on 19.03.2023.
 //
-
+#include "MathLibraryExceptions.h"
 #ifndef KARCULATQR_MATHLIBRARY_H
 #define KARCULATQR_MATHLIBRARY_H
 
@@ -49,7 +49,7 @@ public:
 	void divide();
 	/**
 	 * calculates factorial of currentValue.
-	 * stores the result to previousResult
+	 * stores the result to currentValue
 	 */
 	void calculateFactorial();
 
@@ -101,6 +101,18 @@ private:
 	double previousResult;
 	bool isCurrentValueSet;
 	bool isPreviousResultSet;
+	double numberone;
+	double numbertwo;
+	bool isInRadians;
+	/**
+	 * @brief numberone and numbertwo to the values they should be.
+	 */
+	void getTwoNumbers();
+	/**
+	 * @brief Get the One Number object
+	 */
+	void getOneNumber();
+
 };
 
 
