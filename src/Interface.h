@@ -1,6 +1,7 @@
 #include <QString>
 
 enum operand{none_e, plus_e, minus_e, multiply_e, divide_e, invert_e, power_e, sqrt_e, sin_e, cos_e, tg_e};
+enum action{all_clear_e, clear_e, mem_plus_e, mem_minus_e, memory_e,rad_deg_e, error_e};
 
 class Interface {
 public:
@@ -13,6 +14,7 @@ public:
     
     QString addDot();
     QString handleOperation(enum operand);
+    QString handleAction(enum action);
     	
     double add_s();
     double substract_s();

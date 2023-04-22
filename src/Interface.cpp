@@ -59,8 +59,13 @@ QString Interface::handleOperation(enum operand recOperation){
     isLastOperand = true;
     pendingOperand = recOperation;
     return current_value;
-};
+}
 
+
+QString Interface::handleAction(enum action recAction){
+	
+    return QString("Nan");
+}
 /**
 * Testing fucntions for GUI to call in absence of math library.
 * 

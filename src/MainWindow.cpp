@@ -77,18 +77,49 @@ void MainWindow::init_middleInteractArea(QHBoxLayout *middleInteractArea_Lt)
     auto *memPlus_Bt = new QPushButton("M+");
     auto *memMinus_Bt = new QPushButton("M-");
     auto *mr_Bt = new QPushButton("MR");
+    auto *rad_deg_Bt = new QPushButton("Deg");
 
     middleInteractArea_Lt->addWidget(clearEverything_Bt);
     middleInteractArea_Lt->addWidget(allClear_Bt);
     middleInteractArea_Lt->addWidget(memPlus_Bt);
     middleInteractArea_Lt->addWidget(memMinus_Bt);
     middleInteractArea_Lt->addWidget(mr_Bt);
+    middleInteractArea_Lt->addWidget(rad_deg_Bt);
     
     QPalette pal = clearEverything_Bt->palette();
     pal.setColor(QPalette::Button, QColor(QColor(156,34,34)));
     clearEverything_Bt->setAutoFillBackground(false);
     clearEverything_Bt->setPalette(pal);
     clearEverything_Bt->update();
+    
+    
+	auto *allClear_sc = new QShortcut(QKeySequence("a"), this);
+	auto *clearEverything_sc = new QShortcut(QKeySequence("c"), this);
+	auto *memPlus_sc = new QShortcut(QKeySequence("h"), this);
+	auto *memMinus_sc = new QShortcut(QKeySequence("g"), this);
+	auto *mr_sc = new QShortcut(QKeySequence("m"), this);
+	auto *rad_deg_sc = new QShortcut(QKeySequence("d"), this);
+	
+    allClear_Bt->setToolTip("a");
+    clearEverything_Bt->setToolTip("c");
+    memPlus_Bt->setToolTip("h");
+    memMinus_Bt->setToolTip("g");
+    mr_Bt->setToolTip("m");
+    rad_deg_Bt->setToolTip("d");
+    
+    connect(allClear_sc, &QShortcut::activated, allClear_Bt, &QPushButton::click);
+    connect(clearEverything_sc, &QShortcut::activated, clearEverything_Bt, &QPushButton::click);
+    connect(memPlus_sc, &QShortcut::activated, memPlus_Bt, &QPushButton::click);
+    connect(memMinus_sc, &QShortcut::activated, memMinus_Bt, &QPushButton::click);
+    connect(mr_sc, &QShortcut::activated, mr_Bt, &QPushButton::click);
+    connect(rad_deg_sc, &QShortcut::activated, rad_deg_Bt, &QPushButton::click);
+    
+    connect(allClear_Bt, &QPushButton::clicked, this, &MainWindow::sendAction);
+    connect(clearEverything_Bt, &QPushButton::clicked, this, &MainWindow::sendAction);
+    connect(memPlus_Bt, &QPushButton::clicked, this, &MainWindow::sendAction);
+    connect(memMinus_Bt, &QPushButton::clicked, this, &MainWindow::sendAction);
+    connect(mr_Bt, &QPushButton::clicked, this, &MainWindow::sendAction);
+    connect(rad_deg_Bt, &QPushButton::clicked, this, &MainWindow::sendAction);
 }
 
 void MainWindow::init_operandsLayout(QGridLayout *operands_Lt)
@@ -291,5 +322,34 @@ void MainWindow::sendOperation(){
     }
     else if (charOpearation == "=") {
         display_LE->setText(interface->handleOperation(none_e));
+    }
+}
+
+void MainWindow::sendAction(){
+    QPushButton *clickedButton = qobject_cast<QPushButton *>(sender());
+    auto charOpearation = clickedButton->text();
+    if (charOpearation == "AC") {
+        display_LE->setText(interface->handleAction(all_clear_e));
+    }
+    else if (charOpearation == "CE") {
+        display_LE->setText(interface->handleAction(clear_e));
+    }
+    else if (charOpearation == "M+") {
+        display_LE->setText(interface->handleAction(mem_plus_e));
+    }
+    else if (charOpearation == "M-") {
+        display_LE->setText(interface->handleAction(mem_minus_e));
+    }
+    else if (charOpearation == "MR") {
+        display_LE->setText(interface->handleAction(memory_e));
+    }
+    else if (charOpearation == "Deg" || charOpearation == "Rad") {
+        display_LE->setText(interface->handleAction(rad_deg_e));
+        if (charOpearation == "Deg") {
+        	clickedButton->setText("Rad");
+        }
+        else {
+        	clickedButton->setText("Deg");
+        }
     }
 }

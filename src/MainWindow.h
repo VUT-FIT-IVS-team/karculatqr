@@ -27,6 +27,7 @@ private slots:
     void sendDigit();
     void sendDot();
     void sendOperation();
+    void sendAction();
 
 private:
 
