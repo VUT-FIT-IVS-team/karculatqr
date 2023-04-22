@@ -153,7 +153,6 @@ void MathLibrary::calculateRoot() {
 }
 
 void MathLibrary::calculateSin() {
-	// TODO: Implement calculateSin
 	getOneNumber();
 	if (isInRadians) {
 		currentValue = sin(numberone);
@@ -165,29 +164,40 @@ void MathLibrary::calculateSin() {
 }
 
 void MathLibrary::calculateCos() {
-	// TODO: Implement calculateCos
 	getOneNumber();
 	if (isInRadians) {
-		currentValue = cos(numberone);
+		currentValue = roundf(cos(numberone));
 	}
 	else {
-		currentValue = roundf(cos(numberone * M_PI / 180));
+		currentValue = cos(numberone * M_PI / 180);
 		
 	}
 }
 
 void MathLibrary::calculateTan() {
-	// TODO: Implement calculateTan
 	getOneNumber();
 	if (isInRadians) {
+		if(cos(numberone) == 0){
+			throw MathLibraryException("Tan of 90 degrees", MathLibraryExceptionType::InvalidInput);
+		} else {
 		currentValue = tan(numberone);
+		isCurrentValueSet = true;
+		}
 	}
 	else {
-		currentValue = tan(numberone * M_PI / 180);
+		if(std::abs(std::cos(numberone * M_PI / 180)) < 1e-9){
+			throw MathLibraryException("Tan of 90 degrees", MathLibraryExceptionType::InvalidInput);
+		} else {
+			if (fmod(numberone, 180.0) == 0) {
+				currentValue = 0;
+				isCurrentValueSet = true;
+			} else {
+				currentValue = tan(numberone * M_PI / 180);
+				isCurrentValueSet = true;
+			}
+		}
 	}
-	/* if (fmod(currentValue, 90.00) == 0) {
-		throw MathLibraryException("Tan of 90 degrees", MathLibraryExceptionType::InvalidInput);
-	} */
+
 }
 
 void MathLibrary::switchToDegrees() {
@@ -197,6 +207,7 @@ void MathLibrary::switchToDegrees() {
 void MathLibrary::switchToRadians() {
 	isInRadians = true;
 }
+
 
 double MathLibrary::getCurrentValue() const {
 	if (!isCurrentValueSet) {

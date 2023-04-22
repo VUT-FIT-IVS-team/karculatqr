@@ -172,4 +172,19 @@ TEST_F(MathLibraryTest, testCalculateTan){
     m->setCurrentValue(M_PI / 3);
     m->calculateTan();
     EXPECT_DOUBLE_EQ(sqrt(3), m->getCurrentValue());
+    m->switchToDegrees();
+    m->clearCurrentValue();
+    m->setCurrentValue(90);
+    EXPECT_THROW(m->calculateTan(), MathLibraryException);
+    m->clearCurrentValue();
+    m->setCurrentValue(180);
+    m->calculateTan();
+    EXPECT_DOUBLE_EQ(0, m->getCurrentValue());
+    m->clearCurrentValue();
+    m->setCurrentValue(270);
+    EXPECT_THROW(m->calculateTan(), MathLibraryException);
+    m->clearCurrentValue();
+    m->setCurrentValue(360);
+    m->calculateTan();
+    EXPECT_DOUBLE_EQ(0, m->getCurrentValue());
 }
