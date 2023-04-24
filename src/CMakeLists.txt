@@ -1,5 +1,7 @@
-cmake_minimum_required(VERSION 3.26)
+cmake_minimum_required(VERSION 3.24)
 project(karculatqr)
+
+set(CMAKE_OSX_ARCHITECTURES "x86_64")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 

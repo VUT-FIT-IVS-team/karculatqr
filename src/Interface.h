@@ -1,4 +1,5 @@
 #include <QString>
+#include "MathLibrary.h"
 
 enum operand{none_e, plus_e, minus_e, multiply_e, divide_e, invert_e, power_e, sqrt_e, sin_e, cos_e, tg_e};
 enum action{all_clear_e, clear_e, mem_plus_e, mem_minus_e, memory_e,rad_deg_e, error_e};
@@ -20,15 +21,14 @@ public:
     double substract_s();
     double multiply_s();
     double divide_s();
-    double sin();
-    double cos();
-    double tg();
-    
+
     double performOperation(enum operand);
     
 private:
     double pre_number;
     double cur_number;
+
+    MathLibrary m;
     
     QString current_value;
     operand pendingOperand = none_e;

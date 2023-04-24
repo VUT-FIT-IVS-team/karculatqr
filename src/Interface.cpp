@@ -5,9 +5,10 @@
 #include <QDebug>
 #include <QString>
 
-#include <math.h>
-
-Interface::Interface() { current_value = QString(); };
+Interface::Interface() {
+    current_value = QString();
+    m = MathLibrary();
+};
 
 Interface::~Interface(){};
 
@@ -51,12 +52,7 @@ QString Interface::addDot() {
 */
 QString Interface::handleOperation(enum operand recOperation){
     current_value = QString::number(performOperation(pendingOperand));
-	
-  	if (!isLastOperand) {
-        pre_number = current_value.toDouble();
-  	}
-	
-    isLastOperand = true;
+
     pendingOperand = recOperation;
     return current_value;
 }
@@ -73,7 +69,8 @@ QString Interface::handleAction(enum action recAction){
 * 
 */
 double Interface::add_s(){
-    return cur_number + pre_number;
+    m.add();
+    return m.getPreviousResult();
 }
 double Interface::substract_s(){
     return cur_number - pre_number;
@@ -96,11 +93,11 @@ double Interface::divide_s(){
 * @param Operation to be performed
 */
 double Interface::performOperation(enum operand Operation){
-    cur_number = current_value.toDouble();
+    m.setCurrentValue(current_value.toDouble());
 	switch (pendingOperand) {
 	default:
 	case none_e:
-	        return current_value.toDouble();
+	        return m.getCurrentValue();
 	case plus_e:
 			return add_s();
 	case minus_e:
