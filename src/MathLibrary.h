@@ -54,14 +54,13 @@ public:
 	void calculateFactorial();
 
 	/**
-	 * calculates previosValut to the power of currentValue.
+	 * calculates previousResult to the power of currentValue.
 	 * stores the result to previousResult
 	 */
 	void calculatePower();
 
 	/**
 	 * calculates the currentValue's root of previousResult.
-	 * if currentValue is not set, defaults to 2
 	 * stores the result to previousResult
 	 */
 	void calculateRoot();
