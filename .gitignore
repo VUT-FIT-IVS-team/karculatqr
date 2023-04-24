@@ -8,8 +8,9 @@ latex/
 # CLion
 .idea/
 
-# Standard
+# CMake build files
 build/
+
 
 # Cache
 src/.cache/
