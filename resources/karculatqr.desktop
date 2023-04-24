@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=karculatqr
+Exec=/usr/bin/karculatqr %u
+Type=Application
+NoDisplay=false
+Categories=App;
