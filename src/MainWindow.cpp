@@ -309,7 +309,7 @@ void MainWindow::sendOperation(){
         display_LE->setText(interface->handleOperation(power_e));
     }
     else if (charOpearation == "√") {
-        display_LE->setText(interface->handleOperation(sqrt_e));
+        display_LE->setText(interface->handleOperation(root_e));
     }
     else if (charOpearation == "sin x") {
         display_LE->setText(interface->handleOperation(sin_e));
@@ -321,7 +321,7 @@ void MainWindow::sendOperation(){
         display_LE->setText(interface->handleOperation(tg_e));
     }
     else if (charOpearation == "=") {
-        display_LE->setText(interface->handleOperation(none_e));
+        display_LE->setText(interface->handleOperation(equals_e));
     }
 }
 
@@ -347,9 +347,11 @@ void MainWindow::sendAction(){
         display_LE->setText(interface->handleAction(rad_deg_e));
         if (charOpearation == "Deg") {
         	clickedButton->setText("Rad");
+            interface->switchToRad();
         }
         else {
         	clickedButton->setText("Deg");
+            interface->switchToDeg();
         }
     }
 }
