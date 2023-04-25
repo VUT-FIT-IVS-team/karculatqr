@@ -72,7 +72,7 @@ double Interface::add_s(){
     m.add();
     return m.getPreviousResult();
 }
-double Interface::substract_s(){
+double Interface::subtract_s(){
     return cur_number - pre_number;
 }
 
@@ -101,7 +101,7 @@ double Interface::performOperation(enum operand Operation){
 	case plus_e:
 			return add_s();
 	case minus_e:
-			return substract_s();
+			return subtract_s();
 	case multiply_e:
 			return multiply_s();
 	case divide_e:

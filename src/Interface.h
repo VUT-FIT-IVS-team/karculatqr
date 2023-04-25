@@ -18,7 +18,7 @@ public:
     QString handleAction(enum action);
     	
     double add_s();
-    double substract_s();
+    double subtract_s();
     double multiply_s();
     double divide_s();
 
