@@ -47,6 +47,7 @@ MathLibrary::MathLibrary() {
 	previousResult = 0;
 	isCurrentValueSet = false;
 	isPreviousResultSet = false;
+    isInRadians = false;
 }
 
 void MathLibrary::clearCurrentValue() {
@@ -166,6 +167,7 @@ void MathLibrary::calculateSin() {
 void MathLibrary::calculateCos() {
 	getOneNumber();
 	if (isInRadians) {
+        // TODO remove rounding
 		currentValue = roundf(cos(numberone));
 	}
 	else {

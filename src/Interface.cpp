@@ -1,111 +1,119 @@
 #include "Interface.h"
-#include <QDebug>
-#include <cmath>
-#include <qchar.h>
-#include <QDebug>
-#include <QString>
 
 Interface::Interface() {
-    current_value = QString();
+    entered_number = QString();
+    displayed_number = QString();
     m = MathLibrary();
 };
 
-Interface::~Interface(){};
-
-QString Interface::getCurrent_value() { return current_value; };
-
-/**
-* Adds digit to text currently displayed in GUI.
-* Doesnt affect the number variables
-*/
 QString Interface::addDigit(QString digit) {
     if (isEnteringNewNumber) {
-        pre_number = current_value.toDouble();
-        current_value.clear();
+        entered_number.clear();
     }
-    current_value.append(digit);
+    entered_number.append(digit);
     isEnteringNewNumber = false;
-    return current_value;
+    return entered_number;
 }
 
-
-/**
-* Adds dot to current text displayed in GUI.
-* Doesnt affect the number variables
-*/
 QString Interface::addDot() {
+    if (isEnteringNewNumber) {
+        entered_number.clear();
+        entered_number.append("0");
+    }
     if (!isFloat) {
-        current_value.append(QStringLiteral("%1").arg('.'));
+        entered_number.append(QStringLiteral("%1").arg('.'));
         isFloat = true;
     }
     isEnteringNewNumber = false;
-    return current_value;
+    return entered_number;
 }
 
-/**
-* Calls performOperation function and does some helper things,
-* like check if last operation was adding number or operation.
-* Sets cur_number to current value present on display.
-*
-* 
-* @param Operation to be performed
-*/
 QString Interface::handleOperation(enum operand recOperation){
-    if (recOperation == equals_e) {
-        m.setCurrentValue(current_value.toDouble());
-        current_value = QString::number(performOperation(pendingOperand));
-        isEnteringNewNumber = true;
-        return current_value;
-    }
+    try {
+        if (recOperation > unary) {
+            return handleUnaryOperation(recOperation);
+        }
 
-    if (!isEnteringNewNumber) {
-        current_value = QString::number(performOperation(pendingOperand));
         isEnteringNewNumber = true;
+        if (pendingOperand == none_e) {
+            m.setCurrentValue(entered_number.toDouble());
+            pendingOperand = recOperation;
+            return entered_number;
+        }
+
+        if (recOperation == equals_e) {
+            displayed_number = QString::number(performOperation(pendingOperand));
+            return displayed_number;
+        } else {
+            pendingOperand = recOperation;
+        }
+
+        displayed_number = QString::number(performOperation(pendingOperand));
+        return displayed_number;
     }
-    pendingOperand = recOperation;
-    return current_value;
+    catch (MathLibraryException exc)
+
+    {
+        handleAction(all_clear_e);
+        return QString(exc.what());
+    }
 }
 
-QString handleUnaryOperation(enum operand){
+QString Interface::handleUnaryOperation(enum operand operation){
+    if (operation <= unary){
+        return QString("Internal error");
+    }
+    m.setCurrentValue(entered_number.toDouble());
+    switch (operation) {
+        case factorial_e:
+            m.calculateFactorial();
+            break;
+        case sin_e:
+            m.calculateSin();
+            break;
+        case cos_e:
+            m.calculateCos();
+            break;
+        case tg_e:
+            m.calculateTan();
+            break;
+    }
+
+    isEnteringNewNumber = true;
+    entered_number = QString::number(m.getCurrentValue());
+    m.clearCurrentValue();
+    return entered_number;
 
 }
 
 
 QString Interface::handleAction(enum action recAction){
-
     switch (recAction) {
         case all_clear_e:
             m.clearState();
-            isEnteringNewNumber = false;
+            isEnteringNewNumber = true;
+            entered_number.clear();
             pendingOperand = none_e;
-            return current_value;
+            return entered_number;
         case clear_e:
             m.clearCurrentValue();
-            current_value = QString();
-            return current_value;
+            entered_number.clear();
+            isEnteringNewNumber = true;
+            return entered_number;
         case mem_plus_e:
-            // TODO:
+            memory += entered_number.toDouble();
             break;
         case mem_minus_e:
-            // TODO:
+            memory -= entered_number.toDouble();
             break;
         case memory_e:
-            // TODO:
-            break;
-        case rad_deg_e:
-            // TODO:
+            entered_number = QString::number(memory);
             break;
 
     }
 	
-    return QString("Nan");
+    return entered_number;
 }
-/**
-* Testing fucntions for GUI to call in absence of math library.
-* 
-* PLACEHOLDER FOR MATH LIBRARY
-* 
-*/
 
 void Interface::switchToRad(){
     m.switchToRadians();
@@ -115,18 +123,11 @@ void Interface::switchToDeg(){
     m.switchToDegrees();
 }
 
-/**
-* Calls matching function decided by pressed button.
-* Sets cur_number to current value present on display.
-*
-* 
-* @param Operation to be performed
-*/
-double Interface::performOperation(enum operand Operation){
-    m.setCurrentValue(current_value.toDouble());
-	switch (pendingOperand) {
+
+double Interface::performOperation(enum operand operation){
+    m.setCurrentValue(entered_number.toDouble());
+	switch (operation) {
         default:
-        case none_e:
             break;
         case plus_e:
             m.add();

@@ -56,7 +56,6 @@ MainWindow::MainWindow(){
     display_LE->setReadOnly(true);
     display_LE->setMinimumHeight(50);
     display_LE->setMaximumHeight(200);
-    display_LE->setText(interface->getCurrent_value());
     display_LE->setPlaceholderText("0");
     
     main_Lt->addLayout(middleInteractArea_Lt);
@@ -344,7 +343,6 @@ void MainWindow::sendAction(){
         display_LE->setText(interface->handleAction(memory_e));
     }
     else if (charOpearation == "Deg" || charOpearation == "Rad") {
-        display_LE->setText(interface->handleAction(rad_deg_e));
         if (charOpearation == "Deg") {
         	clickedButton->setText("Rad");
             interface->switchToRad();
