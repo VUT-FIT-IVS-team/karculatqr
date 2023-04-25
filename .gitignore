@@ -10,5 +10,7 @@ latex/
 
 # CMake build files
 build/
+src/cmake-build*/
 
-src/cmake-build-debug/
+# Cache
+src/.cache/
