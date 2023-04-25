@@ -17,7 +17,7 @@ Z aktuálně zadaného čísla vypočte faktoriál a ponechá předchozí zadan�
 #### Mocnina
 Předešlé číslo se stane bázou mocniny a aktuální číslo se stane exponentem mocniny.
 #### Odmocnina
-Před zmáčknutím operace odmocniny je třeba zadat číslo, které je žádáno odmocnit a po zmáčknutí operace odmocnina je třeba zadat číslo
+Před zmáčknutím operace odmocniny je třeba zadat číslo, které je žádáno odmocnit a po zmáčknutí operace odmocnina je třeba zadat číslo, které je n-tá odmocnina
 #### Přepnutí do radiánů/stupňů
 Po stistknutí tlačítka přepne režim kalkulačky do radiánů nebo stupňů a ponechá předchozí zadané číslo.
 #### Sinus
