@@ -3,7 +3,9 @@
 ### Instalace 
 Stáhnutí zipu, který se rozbalí. Naklikne se dvakrát na skript a nainstaluje se to
 ### Ovládání
-Aplikace obsahuje tlačítka označené číslicemi a matematickými operacemi (popsáno níže). Stlačením číslice se zadá do kalkulačky a při stisknutí tlačítka matematické operace se zadané číslo uloží do paměti kalkulačky a započne se zadání dalšího čísla. Při stisknutí tlačítka "`=`" proběhne operace mezi těmi dvěma čísly, anebo se provede předchozí operace. Některé operace jsou unární
+Aplikace obsahuje tlačítka označené číslicemi a matematickými operacemi (popsáno níže). Stlačením číslice se zadá do kalkulačky a při stisknutí tlačítka matematické operace se zadané číslo uloží do paměti kalkulačky a započne se zadávání dalšího čísla. Při stisknutí tlačítka `=` proběhne operace mezi uloženým a zadaným číslem a výsledek bude uložen a zobrazen na displeji kalkulačky. Při stisknutí jiné operace proběhne výpočet stejně, jako při stisknutí tlačítka `=` kdy je možné rovnou zadat další číslo pro právě stisknutou operaci. 
+
+Některé operace jsou unární – jejich výsledek nepřepisuje uložené číslo.
 #### Sčítaní
 Sečte předešlé a aktuální číslo.
 #### Odčítání
