@@ -7,12 +7,12 @@ Autori
 ------
 
 🦆
-- Lukáš Bláha     xblaha37 GitHub: Blaza2002
-- Jan Brudný 	    xbrudn02 GitHub: Kiznoh
-- Jaromír Otevřel xotevr03 GitHub: ProsteJarda
-- Ondřej Přibyl 	xpriby20 GitHub: widowCutter
+- xblaha37 Lukas Blaha
+- xbrudn02 Jan Brudny
+- xotevr03 Jaromir Otevrel
+- xpriby20 Ondrej Pribyl
 
 Licence
 -------
 
-Tento program je poskytovan pod licencí GNU GPL v. 3
+Tento program je poskytovan pod licenci GNU GPL v. 3
