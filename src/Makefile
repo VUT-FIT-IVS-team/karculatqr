@@ -1,6 +1,18 @@
-run: main.c
+run: all 
 	./build/karculatqr
 	
-main.c: 
+all: 
+	if ! [ -d "build" ]; then mkdir build && (cd build ;cmake ..); fi
 	(cd ./build/; make)
+
+pack: TODO
+
+test: TODO
+
+profile:
+	
+
+clean: 
+	rm -rf ./build/
+	
 
