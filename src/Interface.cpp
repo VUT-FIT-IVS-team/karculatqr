@@ -112,7 +112,7 @@ double Interface::performOperation(enum operand Operation){
 			return divide_s();
 	case tg_e:
 			return divide_s();
-	case invert_e:
+	case factorial_e:
 			return divide_s();
 	case power_e:
 			return divide_s();

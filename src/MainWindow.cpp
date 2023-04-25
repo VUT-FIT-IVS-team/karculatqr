@@ -128,7 +128,7 @@ void MainWindow::init_operandsLayout(QGridLayout *operands_Lt)
     auto *minus_Bt = new QPushButton("-");
     auto *divide_Bt = new QPushButton("÷");
     auto *times_Bt = new QPushButton("×");
-    auto *minPlus_Bt = new QPushButton("±");
+    auto *factorial_Bt = new QPushButton("!");
     auto *equals_Bt = new QPushButton("=");
     auto *power_Bt = new QPushButton("xʸ");
     auto *root_Bt = new QPushButton("√");
@@ -148,7 +148,7 @@ void MainWindow::init_operandsLayout(QGridLayout *operands_Lt)
     minus_Bt->setFont(font);
     divide_Bt->setFont(font);
     times_Bt->setFont(font);
-    minPlus_Bt->setFont(font);
+    factorial_Bt->setFont(font);
     equals_Bt->setFont(font);
     power_Bt->setFont(font);
     root_Bt->setFont(font);
@@ -161,7 +161,7 @@ void MainWindow::init_operandsLayout(QGridLayout *operands_Lt)
     operands_Lt->addWidget(minus_Bt, 1,1);
     operands_Lt->addWidget(divide_Bt, 3,1);
     operands_Lt->addWidget(times_Bt, 4,1);
-    operands_Lt->addWidget(minPlus_Bt, 1,2);
+    operands_Lt->addWidget(factorial_Bt, 1, 2);
     operands_Lt->addWidget(power_Bt, 2,2);
     operands_Lt->addWidget(root_Bt, 3,2);
     operands_Lt->addWidget(sin_Bt, 1,3);
@@ -179,7 +179,7 @@ void MainWindow::init_operandsLayout(QGridLayout *operands_Lt)
     minus_Bt->setSizePolicy(p);
     divide_Bt->setSizePolicy(p);
     times_Bt->setSizePolicy(p);
-    minPlus_Bt->setSizePolicy(p);
+    factorial_Bt->setSizePolicy(p);
     power_Bt->setSizePolicy(p);
     root_Bt->setSizePolicy(p);
     cosin_Bt->setSizePolicy(p);
@@ -190,7 +190,7 @@ void MainWindow::init_operandsLayout(QGridLayout *operands_Lt)
     connect(minus_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
     connect(divide_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
     connect(times_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
-    connect(minPlus_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
+    connect(factorial_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
     connect(power_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
     connect(root_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
     connect(cosin_Bt, &QPushButton::clicked, this, &MainWindow::sendOperation);
@@ -214,9 +214,9 @@ void MainWindow::init_operandsLayout(QGridLayout *operands_Lt)
     connect(times_sc, &QShortcut::activated, times_Bt, &QPushButton::click);
     times_Bt->setToolTip("Key: *");
     
-	auto *minPlus_sc = new QShortcut(QKeySequence("i"), this);
-    connect(minPlus_sc, &QShortcut::activated, minPlus_Bt, &QPushButton::click);
-    minPlus_Bt->setToolTip("Key: i");
+	auto *minPlus_sc = new QShortcut(QKeySequence("f"), this);
+    connect(minPlus_sc, &QShortcut::activated, factorial_Bt, &QPushButton::click);
+    factorial_Bt->setToolTip("Key: f");
     
 	auto *power_sc = new QShortcut(QKeySequence("o"), this);
     connect(power_sc, &QShortcut::activated, power_Bt, &QPushButton::click);
@@ -302,8 +302,8 @@ void MainWindow::sendOperation(){
     else if (charOpearation == "×") {
         display_LE->setText(interface->handleOperation(multiply_e));
     }
-    else if (charOpearation == "±") {
-        display_LE->setText(interface->handleOperation(invert_e));
+    else if (charOpearation == "!") {
+        display_LE->setText(interface->handleOperation(factorial_e));
     }
     else if (charOpearation == "xʸ") {
         display_LE->setText(interface->handleOperation(power_e));
