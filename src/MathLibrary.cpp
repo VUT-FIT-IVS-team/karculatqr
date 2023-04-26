@@ -168,8 +168,7 @@ void MathLibrary::calculateSin() {
 void MathLibrary::calculateCos() {
 	getOneNumber();
 	if (isInRadians) {
-        // TODO remove rounding
-		currentValue = round(cos(numberone));
+		currentValue = cos(numberone);
 	}
 	else {
 		currentValue = cos(numberone * M_PI / 180);

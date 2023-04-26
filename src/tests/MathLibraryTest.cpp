@@ -153,7 +153,7 @@ TEST_F(MathLibraryTest, testCalculateCos){
     m->clearCurrentValue();
     m->setCurrentValue(M_PI / 2);
     m->calculateCos();
-    EXPECT_DOUBLE_EQ(0, m->getCurrentValue());
+    EXPECT_NEAR(0, m->getCurrentValue(), 0.000001);
 }
 
 TEST_F(MathLibraryTest, testCalculateTan){
