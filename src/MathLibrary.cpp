@@ -45,8 +45,11 @@ void MathLibrary::getTwoNumbers() {
 MathLibrary::MathLibrary() {
 	currentValue = 0;
 	previousResult = 0;
+    numberone = 0;
+    numbertwo = 0;
 	isCurrentValueSet = false;
 	isPreviousResultSet = false;
+    isInRadians = false;
 }
 
 void MathLibrary::clearCurrentValue() {
@@ -129,7 +132,6 @@ void MathLibrary::calculateFactorial() {
 }
 
 void MathLibrary::calculatePower() {
-	// TODO: Implement calculatePower
 	getTwoNumbers();
 	previousResult =  pow(numberone, numbertwo);
 	isPreviousResultSet = true;
@@ -166,7 +168,8 @@ void MathLibrary::calculateSin() {
 void MathLibrary::calculateCos() {
 	getOneNumber();
 	if (isInRadians) {
-		currentValue = roundf(cos(numberone));
+        // TODO remove rounding
+		currentValue = round(cos(numberone));
 	}
 	else {
 		currentValue = cos(numberone * M_PI / 180);

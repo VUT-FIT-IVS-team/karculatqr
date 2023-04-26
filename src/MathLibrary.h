@@ -96,13 +96,13 @@ public:
 	double getPreviousResult() const;
 
 private:
-	double currentValue;
-	double previousResult;
-	bool isCurrentValueSet;
-	bool isPreviousResultSet;
-	double numberone;
-	double numbertwo;
-	bool isInRadians;
+	double currentValue; /// last pushed number
+	double previousResult; /// stores non-unary operation result
+	bool isCurrentValueSet; /// is the number set?
+	bool isPreviousResultSet; /// is the number set?
+	double numberone; /// first number
+	double numbertwo; /// second number
+	bool isInRadians; /// defaults to degrees
 	/**
 	 * @brief numberone and numbertwo to the values they should be.
 	 */
