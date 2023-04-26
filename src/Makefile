@@ -1,11 +1,12 @@
 CC = g++
 
-run: all
-	./build/karculatqr
-	
 all: 
 	if ! [ -d "build" ]; then mkdir build && (cd build ;cmake ..); fi
 	(cd ./build/; make)
+	
+run: all
+	./build/karculatqr
+	
 
 test: all
 	build/MathLibraryTest
