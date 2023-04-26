@@ -88,6 +88,8 @@ QString Interface::handleUnaryOperation(enum operand operation){
         case tg_e:
             m.calculateTan();
             break;
+        default:
+            return entered_number;
     }
 
     isEnteringNewNumber = true;
