@@ -1,0 +1,44 @@
+IVS projekt 2 – plán
+####################
+
+Zvolený systém pro správu verzí
+===============================
+GitHub: https://github.com/VUT-FIT-IVS-team/karculatqr
+účet ivs.kontrola@gmail.com byl pozván s právy readonly
+
+Členové týmu
+============
+Lukáš Bláha     xblaha37 GitHub: Blaza2002
+Jan Brudný 	    xbrudn02 GitHub: Kiznoh
+Jaromír Otevřel xotevr03 GitHub: ProsteJarda
+Ondřej Přibyl 	xpriby20 GitHub: widowCutter
+
+Stanovené termíny, přidělení jednotlivým řešitelům
+==================================================
+ne 19.3. [DONE] definice rozhraní matematické knihovny – Honza
+st 22.3. [DONE] testy matematické knihovny – Lukáš
+
+so 22.4. TDD matematická knihovna – Jarda
+ne 23.4. doxygen dokumentace matematické knihovny – Jarda
+
+so 22.4. program pro výpočet výběrové směrodatné odchylky – Lukáš
+so 22.4. protokol profileru a případné optimalizace knihovny – Honza
+
+ne 19.3. [DONE] mockup GUI v např. Figmě – Ondra
+čt 30.3. [DONE] vytvoření GUI v Qt – Ondra
+ne 23.4. napojení GUI na matematickou knihovnu – Ondra
+út 25.4. testy napojení GUI – Lukáš
+út 25.4. integrační testování – Lukáš
+
+út 25.4. psaní nápovědy - Jarda
+út 25.4. programová dokumentace – všichni během implementace
+
+so 22.4. (od)instalátor – Ondra
+so 22.4. code review – Honza
+ne 23.4. návod manuální (od)instalace i kompilace – Honza
+ne 23.4. Makefile – Honza a Ondra
+
+
+Zvolené komunikační kanály
+==========================
+Discord

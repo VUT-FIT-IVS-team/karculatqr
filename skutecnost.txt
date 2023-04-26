@@ -1,0 +1,51 @@
+Původní  plán
+==========================================================
+ne 19.3. definice rozhraní matematické knihovny – Honza
+st 22.3. testy matematické knihovny – Lukáš
+ne 26.3. TDD matematická knihovna – Jarda
+čt 6. 4. doxygen dokumentace matematické knihovny – Jarda
+
+ne 2. 4. program pro výpočet výběrové směrodatné odchylky – Lukáš
+čt 6. 4. protokol profileru a případné optimalizace knihovny – Honza
+
+ne 19.3. mockup GUI v např. Figmě – Ondra
+čt 30.3. vytvoření GUI v Qt – Ondra
+čt 30.3. napojení GUI na matematickou knihovnu – Ondra
+čt 6. 4. testy napojení GUI – Lukáš
+
+ne 16.4. psaní nápovědy - Jarda
+ne 16.4. programová dokumentace – všichni během implementace
+ne 16.4. (od)instalátor – Honza
+ne 23.4. návod manuální (od)instalace – Honza
+ne 23.4. Makefile – Honza a Ondra
+ne 23.4. integrační testování – Lukáš
+==========================================================
+
+Týden před odevzdáním
+
+==========================================================
+ne 19.3. [DONE] definice rozhraní matematické knihovny – Honza
+st 22.3. [DONE] testy matematické knihovny – Lukáš
+
+so 22.4. TDD matematická knihovna – Jarda
+ne 23.4. doxygen dokumentace matematické knihovny – Jarda
+
+so 22.4. program pro výpočet výběrové směrodatné odchylky – Lukáš
+so 22.4. protokol profileru a případné optimalizace knihovny – Honza
+
+ne 19.3. [DONE] mockup GUI v např. Figmě – Ondra
+čt 30.3. [DONE] vytvoření GUI v Qt – Ondra
+ne 23.4. napojení GUI na matematickou knihovnu – Ondra
+út 25.4. testy napojení GUI – Lukáš
+út 25.4. integrační testování – Lukáš
+
+út 25.4. psaní nápovědy - Jarda
+út 25.4. programová dokumentace – všichni během implementace
+
+so 22.4. (od)instalátor – Ondra
+so 22.4. code review – Honza
+ne 23.4. návod manuální (od)instalace i kompilace – Honza
+ne 23.4. Makefile – Honza a Ondra
+==========================================================
+
+Při odevzdání byla většina úkolů dokončena v posledních 72 hodinách.
