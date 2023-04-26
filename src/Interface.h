@@ -87,4 +87,5 @@ private:
     double memory = 0.0;
     bool isFloat = false;
     bool isEnteringNewNumber = false;
+    operand lastOperation = none_e;
 };

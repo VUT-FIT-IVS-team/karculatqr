@@ -40,19 +40,30 @@ QString Interface::handleOperation(enum operand recOperation){
             pendingOperand = recOperation;
             return entered_number;
         }
-
-        if (recOperation == equals_e) {
-            displayed_number = QString::number(performOperation(pendingOperand));
+        if (recOperation == equals_e && pendingOperand != equals_e) {
+            lastOperation = pendingOperand;
+            displayed_number = QString::number(performOperation(lastOperation));
+            pendingOperand = equals_e;
             return displayed_number;
-        } else {
-            pendingOperand = recOperation;
         }
 
+        if (recOperation == equals_e) {
+            displayed_number = QString::number(performOperation(lastOperation));
+            pendingOperand = equals_e;
+            return displayed_number;
+        }
+
+        if (pendingOperand == equals_e) {
+            pendingOperand = recOperation;
+            return entered_number;
+        }
+
+
         displayed_number = QString::number(performOperation(pendingOperand));
+        pendingOperand = recOperation;
         return displayed_number;
     }
     catch (MathLibraryException exc)
-
     {
         handleAction(all_clear_e);
         return QString(exc.what());
@@ -92,6 +103,7 @@ QString Interface::handleAction(enum action recAction){
         case all_clear_e:
             m.clearState();
             isEnteringNewNumber = true;
+            lastOperation = none_e;
             entered_number.clear();
             pendingOperand = none_e;
             return entered_number;
