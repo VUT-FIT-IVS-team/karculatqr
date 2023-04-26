@@ -1,0 +1,4 @@
+xpriby20 100 (GUI, Makefile, mockup, instalátory)
+xbrudn02 100 (definice mat. knihovny, napojení GUI na knihovnu, profiling, Makefile)
+xblaha37 100 (testy, dokumentace, nápověda, testování)
+xotevr03 100 (TDD knihovna, dokumentace, nápověda, debugging)
