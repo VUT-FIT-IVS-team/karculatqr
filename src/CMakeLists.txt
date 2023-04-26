@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.24)
 project(karculatqr)
 
-set(CMAKE_CXX_STANDARD 17)
-
 set(CMAKE_OSX_ARCHITECTURES "x86_64")
+
+set(CMAKE_CXX_STANDARD 17)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -27,6 +27,8 @@ target_link_libraries(MathLibraryTest gtest_main MathLibrary)
 
 add_test(NAME MathLibraryTest COMMAND MathLibraryTest)
 
+add_executable(stddev stddev/main.cpp)
+target_link_libraries(stddev MathLibrary)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
@@ -49,4 +51,3 @@ target_link_libraries(karculatqr
         Qt5::Widgets
 		MathLibrary
 		)
-

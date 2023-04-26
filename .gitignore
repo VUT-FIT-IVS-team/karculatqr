@@ -12,6 +12,5 @@ latex/
 build/
 src/cmake-build*/
 
-
 # Cache
 src/.cache/
