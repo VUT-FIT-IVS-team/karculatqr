@@ -1,6 +1,7 @@
 #include <cstdio>
 #include <qboxlayout.h>
 #include <qcolor.h>
+#include <qdialog.h>
 #include <qfont.h>
 #include <qgridlayout.h>
 #include <QLineEdit>
@@ -15,6 +16,8 @@
 #include <qwidget.h>
 #include "MainWindow.h"
 #include <QShortcut>
+#include <QDialog>
+#include <QPlainTextEdit>
 
 MainWindow::MainWindow(){
     interface = new Interface;
@@ -77,6 +80,7 @@ void MainWindow::init_middleInteractArea(QHBoxLayout *middleInteractArea_Lt)
     auto *memMinus_Bt = new QPushButton("M-");
     auto *mr_Bt = new QPushButton("MR");
     auto *rad_deg_Bt = new QPushButton("Deg");
+    auto *help_Bt = new QPushButton("Help");
 
     middleInteractArea_Lt->addWidget(clearEverything_Bt);
     middleInteractArea_Lt->addWidget(allClear_Bt);
@@ -84,6 +88,7 @@ void MainWindow::init_middleInteractArea(QHBoxLayout *middleInteractArea_Lt)
     middleInteractArea_Lt->addWidget(memMinus_Bt);
     middleInteractArea_Lt->addWidget(mr_Bt);
     middleInteractArea_Lt->addWidget(rad_deg_Bt);
+    middleInteractArea_Lt->addWidget(help_Bt);
     
     QPalette pal = clearEverything_Bt->palette();
     pal.setColor(QPalette::Button, QColor(QColor(156,34,34)));
@@ -98,13 +103,15 @@ void MainWindow::init_middleInteractArea(QHBoxLayout *middleInteractArea_Lt)
 	auto *memMinus_sc = new QShortcut(QKeySequence("g"), this);
 	auto *mr_sc = new QShortcut(QKeySequence("m"), this);
 	auto *rad_deg_sc = new QShortcut(QKeySequence("d"), this);
+	auto *help_sc = new QShortcut(QKeySequence("F1"), this);
 	
-    allClear_Bt->setToolTip("a");
-    clearEverything_Bt->setToolTip("c");
-    memPlus_Bt->setToolTip("h");
-    memMinus_Bt->setToolTip("g");
-    mr_Bt->setToolTip("m");
-    rad_deg_Bt->setToolTip("d");
+    allClear_Bt->setToolTip("key: a");
+    clearEverything_Bt->setToolTip("key: c");
+    memPlus_Bt->setToolTip("key: h");
+    memMinus_Bt->setToolTip("key: g");
+    mr_Bt->setToolTip("key: m");
+    rad_deg_Bt->setToolTip("key: d");
+    help_Bt->setToolTip("key: F1");
     
     connect(allClear_sc, &QShortcut::activated, allClear_Bt, &QPushButton::click);
     connect(clearEverything_sc, &QShortcut::activated, clearEverything_Bt, &QPushButton::click);
@@ -112,6 +119,7 @@ void MainWindow::init_middleInteractArea(QHBoxLayout *middleInteractArea_Lt)
     connect(memMinus_sc, &QShortcut::activated, memMinus_Bt, &QPushButton::click);
     connect(mr_sc, &QShortcut::activated, mr_Bt, &QPushButton::click);
     connect(rad_deg_sc, &QShortcut::activated, rad_deg_Bt, &QPushButton::click);
+    connect(help_sc, &QShortcut::activated, help_Bt, &QPushButton::click);
     
     connect(allClear_Bt, &QPushButton::clicked, this, &MainWindow::sendAction);
     connect(clearEverything_Bt, &QPushButton::clicked, this, &MainWindow::sendAction);
@@ -119,6 +127,8 @@ void MainWindow::init_middleInteractArea(QHBoxLayout *middleInteractArea_Lt)
     connect(memMinus_Bt, &QPushButton::clicked, this, &MainWindow::sendAction);
     connect(mr_Bt, &QPushButton::clicked, this, &MainWindow::sendAction);
     connect(rad_deg_Bt, &QPushButton::clicked, this, &MainWindow::sendAction);
+    connect(help_Bt, &QPushButton::clicked, this, &MainWindow::sendHelp);
+
 }
 
 void MainWindow::init_operandsLayout(QGridLayout *operands_Lt)
@@ -352,4 +362,49 @@ void MainWindow::sendAction(){
             interface->switchToDeg();
         }
     }
+}
+void MainWindow::sendHelp(){
+	auto help_window = new QDialog;
+	auto label = new QTextEdit;
+	auto main_layout = new QVBoxLayout;
+	label->setReadOnly(true);
+	label->setHtml(R"(
+<h1 id="karculatqr">Karculatqr</h1>
+<h2 id="n-vod">Návod</h2>
+<h3 id="ovl-d-n-">Ovládání</h3>
+<p>Aplikace obsahuje tlačítka označené číslicemi a matematickými operacemi (popsáno níže). Stlačením číslice se zadá do kalkulačky a při stisknutí tlačítka matematické operace se zadané číslo uloží do paměti kalkulačky a započne se zadávání dalšího čísla. Při stisknutí tlačítka <code>=</code> proběhne operace mezi uloženým a zadaným číslem a výsledek bude uložen a zobrazen na displeji kalkulačky. Při stisknutí jiné operace proběhne výpočet stejně, jako při stisknutí tlačítka <code>=</code> kdy je možné rovnou zadat další číslo pro právě stisknutou operaci. </p>
+<p>Některé operace jsou unární – jejich výsledek nepřepisuje uložené číslo.</p>
+<h4 id="s-tan-">Sčítaní</h4>
+<p>Sečte předešlé a aktuální číslo.</p>
+<h4 id="od-t-n-">Odčítání</h4>
+<p>Odečte od předešlého čísla aktuální.</p>
+<h4 id="n-soben-">Násobení</h4>
+<p>Vynásobí předešlé a aktuální číslo.</p>
+<h4 id="d-len-">Dělení</h4>
+<p>Vydělí od předešlého čísla aktuální. </p>
+<p>Nelze dělit nulou.</p>
+<h4 id="faktori-l-un-rn-">Faktoriál (unární)</h4>
+<p>Z aktuálně zadaného čísla vypočte faktoriál a ponechá předchozí zadané či vypočítané číslo v paměti kalkulačky.</p>
+<h4 id="mocnina">Mocnina</h4>
+<p>Předešlé číslo se stane bázou mocniny a aktuální číslo se stane exponentem mocniny.</p>
+<h4 id="odmocnina">Odmocnina</h4>
+<p>Před zmáčknutím operace odmocniny je třeba zadat číslo, které je žádáno odmocnit a po zmáčknutí operace odmocnina je třeba zadat číslo, které je n-tá odmocnina</p>
+<h4 id="p-epnut-do-radi-n-stup-">Přepnutí do radiánů/stupňů</h4>
+<p>Po stistknutí tlačítka přepne režim kalkulačky do radiánů nebo stupňů. Text tlačítka reprezentuje aktuální režim.</p>
+<h4 id="sinus-un-rn-">Sinus (unární)</h4>
+<p>Vypočítá sinus zadaného čísla a ponechá předchozí zadané či vypočítané číslo v paměti kalkulačky.</p>
+<h4 id="cosinus-un-rn-">Cosinus (unární)</h4>
+<p>Vypočítá cosinus zadaného čísla a ponechá předchozí zadané či vypočítané číslo v paměti kalkulačky.</p>
+<h4 id="tangens-un-rn-">Tangens (unární)</h4>
+<p>Vypočítá tangens zadaného čísla a ponechá předchozí zadané či vypočítané číslo v paměti kalkulačky.</p>
+<p>Nelze vypočítat tangens z ±90 stupňů a odpovídajích opakování těchto hodnot (270, -270, ...)</p>
+<h3 id="odinstalace">Odinstalace</h3>
+<p>Stačí spustit skript <code>uninstall_karculatqr</code>. Nachází se v adresáři <code>/usr/bin/</code>, který by měl být v <code>PATH</code>. Podobně jako instalátor, také vyžaduje zadání sudo hesla.</p>
+	)");
+	help_window->setWindowTitle("Karculatqr help");
+	main_layout->addWidget(label);
+	help_window->setMinimumSize(900,700);
+	
+	help_window->setLayout(main_layout);
+	help_window->exec();
 }

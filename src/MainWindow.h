@@ -28,6 +28,7 @@ private slots:
     void sendDot();
     void sendOperation();
     void sendAction();
+    void sendHelp();
 
 private:
 

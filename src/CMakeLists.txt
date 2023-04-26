@@ -27,7 +27,7 @@ target_link_libraries(MathLibraryTest gtest_main MathLibrary)
 
 add_test(NAME MathLibraryTest COMMAND MathLibraryTest)
 
-add_executable(stddev stddev/main.cpp)
+add_executable(stddev stddev.cpp)
 target_link_libraries(stddev MathLibrary)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS 1)

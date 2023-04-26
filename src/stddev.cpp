@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../MathLibrary.h"
+#include "MathLibrary.h"
 #include <vector>
 
 using namespace std;

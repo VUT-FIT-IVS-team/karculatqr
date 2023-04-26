@@ -12,5 +12,11 @@ latex/
 build/
 src/cmake-build*/
 
+src/docs
+src/*.a
+
 # Cache
 src/.cache/
+
+# Objects
+*.o
